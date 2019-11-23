@@ -9,20 +9,10 @@
 *.userosscache
 *.sln.docstates
 
-# User-specific files (MonoDevelop/Xamarin Studio)
-*.userprefs
-
-# Build results
-[Dd]ebug/
-[Dd]ebugPublic/
-[Rr]elease/
-[Rr]eleases/
-x64/
-x86/
-bld/
-[Bb]in/
-[Oo]bj/
-[Ll]og/
+#Debug
+**/obj
+InfoSellers.Tests/obj/Debug/*
+InfoSellers/obj/*
 
 # Visual Studio 2015/2017 cache/options directory
 .vs/
@@ -180,6 +170,7 @@ PublishScripts/
 # NuGet Packages
 *.nupkg
 # The packages folder can be ignored because of Package Restore
+Packages/*
 **/[Pp]ackages/*
 # except build/, which is used as an MSBuild target.
 !**/[Pp]ackages/build/
