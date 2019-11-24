@@ -8,6 +8,12 @@ namespace InfoSellers
         // Para obtener más información sobre las uniones, visite https://go.microsoft.com/fwlink/?LinkId=301862
         public static void RegisterBundles(BundleCollection bundles)
         {
+            bundles.Add(new ScriptBundle("~/bundles/angular").Include(
+                "~/Scripts/libs/runtime*",
+                "~/Scripts/libs/polyfills*",
+                "~/Scripts/libs/vendor*",
+                "~/Scripts/libs/main*"));
+
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
                         "~/Scripts/jquery-{version}.js"));
 
