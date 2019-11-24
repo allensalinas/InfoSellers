@@ -8,6 +8,7 @@ import { Component } from '@angular/core';
 let AppComponent = class AppComponent {
     constructor() {
         this.title = 'InfoSellersAngular';
+        this.version = `${VERSION.major}.${VERSION.minor}`;
     }
 };
 AppComponent = __decorate([
