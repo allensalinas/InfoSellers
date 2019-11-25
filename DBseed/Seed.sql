@@ -24,6 +24,9 @@ CREATE TABLE Rol
 	RolName VARCHAR(20) NOT NULL,
 	CommissionTypeID INT
 )
+GO
+
+ALTER TABLE Rol ADD CONSTRAINT FK_Rol_CommissionType FOREIGN KEY (CommisionTypeID) REFERENCES CommissionType(ID);
 
 CREATE TABLE Seller
 (
@@ -31,9 +34,11 @@ CREATE TABLE Seller
 	FullName VARCHAR(200) NOT NULL,
 	SellerAddress VARCHAR(200) NOT NULL,
 	Phone VARCHAR(20) NOT NULL,
-	PenaltyPercentage DECIMAL(5,2)
+	PenaltyPercentage DECIMAL(5,2) NOT NULL,
+	RolID INT NOT NULL
 )
 GO
+ALTER TABLE Seller ADD CONSTRAINT FK_Seller_Rol FOREIGN KEY (RolID) REFERENCES Rol(ID);
 
 INSERT INTO CommisionType VALUES('junior', 100);
 INSERT INTO CommisionType VALUES('mid', 120);

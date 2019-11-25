@@ -1,0 +1,303 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="InfoSellersModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CommissionType">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CommissionTypeName" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="CommissionValue" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Rol">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RolName" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="CommissionTypeID" Type="int" />
+        </EntityType>
+        <EntityType Name="Seller">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nit" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="FullName" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="SellerAddress" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="Phone" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="PenaltyPercentage" Type="decimal" Precision="5" Scale="2" Nullable="false" />
+          <Property Name="CurrentCommission" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="RolID" Type="int" Nullable="false" />
+          <Property Name="Active" Type="bit" Nullable="false" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'InfoSellers.dbo.View_Sellers' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="View_Sellers">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="Nit" />
+            <PropertyRef Name="FullName" />
+            <PropertyRef Name="SellerAddress" />
+            <PropertyRef Name="Phone" />
+            <PropertyRef Name="PenaltyPercentage" />
+            <PropertyRef Name="Active" />
+            <PropertyRef Name="RolID" />
+            <PropertyRef Name="RolName" />
+            <PropertyRef Name="CommissionTypeName" />
+            <PropertyRef Name="CommissionValue" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="Nit" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="FullName" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="SellerAddress" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="Phone" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="PenaltyPercentage" Type="decimal" Precision="5" Scale="2" Nullable="false" />
+          <Property Name="Active" Type="bit" Nullable="false" />
+          <Property Name="RolID" Type="int" Nullable="false" />
+          <Property Name="CommissionTypeID" Type="int" />
+          <Property Name="RolName" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="CommissionTypeName" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="CommissionValue" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Rol_CommissionType">
+          <End Role="CommissionType" Type="Self.CommissionType" Multiplicity="0..1" />
+          <End Role="Rol" Type="Self.Rol" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CommissionType">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Rol">
+              <PropertyRef Name="CommissionTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Seller_Rol">
+          <End Role="Rol" Type="Self.Rol" Multiplicity="1" />
+          <End Role="Seller" Type="Self.Seller" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rol">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Seller">
+              <PropertyRef Name="RolID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="InfoSellersModelStoreContainer">
+          <EntitySet Name="CommissionType" EntityType="Self.CommissionType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Rol" EntityType="Self.Rol" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Seller" EntityType="Self.Seller" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="View_Sellers" EntityType="Self.View_Sellers" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [View_Sellers].[ID] AS [ID], 
+    [View_Sellers].[Nit] AS [Nit], 
+    [View_Sellers].[FullName] AS [FullName], 
+    [View_Sellers].[SellerAddress] AS [SellerAddress], 
+    [View_Sellers].[Phone] AS [Phone], 
+    [View_Sellers].[PenaltyPercentage] AS [PenaltyPercentage], 
+    [View_Sellers].[Active] AS [Active], 
+    [View_Sellers].[RolID] AS [RolID], 
+    [View_Sellers].[CommissionTypeID] AS [CommissionTypeID], 
+    [View_Sellers].[RolName] AS [RolName], 
+    [View_Sellers].[CommissionTypeName] AS [CommissionTypeName], 
+    [View_Sellers].[CommissionValue] AS [CommissionValue]
+    FROM [dbo].[View_Sellers] AS [View_Sellers]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_Rol_CommissionType" Association="Self.FK_Rol_CommissionType">
+            <End Role="CommissionType" EntitySet="CommissionType" />
+            <End Role="Rol" EntitySet="Rol" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Seller_Rol" Association="Self.FK_Seller_Rol">
+            <End Role="Rol" EntitySet="Rol" />
+            <End Role="Seller" EntitySet="Seller" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="InfoSellersModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="InfoSellersEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CommissionType" EntityType="InfoSellersModel.CommissionType" />
+          <EntitySet Name="Rol" EntityType="InfoSellersModel.Rol" />
+          <EntitySet Name="Seller" EntityType="InfoSellersModel.Seller" />
+          <AssociationSet Name="FK_Rol_CommissionType" Association="InfoSellersModel.FK_Rol_CommissionType">
+            <End Role="CommissionType" EntitySet="CommissionType" />
+            <End Role="Rol" EntitySet="Rol" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Seller_Rol" Association="InfoSellersModel.FK_Seller_Rol">
+            <End Role="Rol" EntitySet="Rol" />
+            <End Role="Seller" EntitySet="Seller" />
+          </AssociationSet>
+          <EntitySet Name="View_Sellers" EntityType="InfoSellersModel.View_Sellers" />
+        </EntityContainer>
+        <EntityType Name="CommissionType">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CommissionTypeName" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="CommissionValue" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <NavigationProperty Name="Rol" Relationship="InfoSellersModel.FK_Rol_CommissionType" FromRole="CommissionType" ToRole="Rol" />
+        </EntityType>
+        <EntityType Name="Rol">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RolName" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="CommissionTypeID" Type="Int32" />
+          <NavigationProperty Name="CommissionType" Relationship="InfoSellersModel.FK_Rol_CommissionType" FromRole="Rol" ToRole="CommissionType" />
+          <NavigationProperty Name="Seller" Relationship="InfoSellersModel.FK_Seller_Rol" FromRole="Rol" ToRole="Seller" />
+        </EntityType>
+        <EntityType Name="Seller">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nit" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FullName" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="SellerAddress" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Phone" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="PenaltyPercentage" Type="Decimal" Nullable="false" Precision="5" Scale="2" />
+          <Property Name="CurrentCommission" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="RolID" Type="Int32" Nullable="false" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Rol" Relationship="InfoSellersModel.FK_Seller_Rol" FromRole="Seller" ToRole="Rol" />
+        </EntityType>
+        <Association Name="FK_Rol_CommissionType">
+          <End Type="InfoSellersModel.CommissionType" Role="CommissionType" Multiplicity="0..1" />
+          <End Type="InfoSellersModel.Rol" Role="Rol" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CommissionType">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Rol">
+              <PropertyRef Name="CommissionTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Seller_Rol">
+          <End Type="InfoSellersModel.Rol" Role="Rol" Multiplicity="1" />
+          <End Type="InfoSellersModel.Seller" Role="Seller" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rol">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Seller">
+              <PropertyRef Name="RolID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="View_Sellers">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="Nit" />
+            <PropertyRef Name="FullName" />
+            <PropertyRef Name="SellerAddress" />
+            <PropertyRef Name="Phone" />
+            <PropertyRef Name="PenaltyPercentage" />
+            <PropertyRef Name="Active" />
+            <PropertyRef Name="RolID" />
+            <PropertyRef Name="RolName" />
+            <PropertyRef Name="CommissionTypeName" />
+            <PropertyRef Name="CommissionValue" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Nit" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FullName" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="SellerAddress" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Phone" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="PenaltyPercentage" Type="Decimal" Nullable="false" Precision="5" Scale="2" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+          <Property Name="RolID" Type="Int32" Nullable="false" />
+          <Property Name="CommissionTypeID" Type="Int32" />
+          <Property Name="RolName" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="CommissionTypeName" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="CommissionValue" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="InfoSellersModelStoreContainer" CdmEntityContainer="InfoSellersEntities">
+          <EntitySetMapping Name="CommissionType">
+            <EntityTypeMapping TypeName="InfoSellersModel.CommissionType">
+              <MappingFragment StoreEntitySet="CommissionType">
+                <ScalarProperty Name="CommissionValue" ColumnName="CommissionValue" />
+                <ScalarProperty Name="CommissionTypeName" ColumnName="CommissionTypeName" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Rol">
+            <EntityTypeMapping TypeName="InfoSellersModel.Rol">
+              <MappingFragment StoreEntitySet="Rol">
+                <ScalarProperty Name="CommissionTypeID" ColumnName="CommissionTypeID" />
+                <ScalarProperty Name="RolName" ColumnName="RolName" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Seller">
+            <EntityTypeMapping TypeName="InfoSellersModel.Seller">
+              <MappingFragment StoreEntitySet="Seller">
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="RolID" ColumnName="RolID" />
+                <ScalarProperty Name="CurrentCommission" ColumnName="CurrentCommission" />
+                <ScalarProperty Name="PenaltyPercentage" ColumnName="PenaltyPercentage" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="SellerAddress" ColumnName="SellerAddress" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="Nit" ColumnName="Nit" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="View_Sellers">
+            <EntityTypeMapping TypeName="InfoSellersModel.View_Sellers">
+              <MappingFragment StoreEntitySet="View_Sellers">
+                <ScalarProperty Name="CommissionValue" ColumnName="CommissionValue" />
+                <ScalarProperty Name="CommissionTypeName" ColumnName="CommissionTypeName" />
+                <ScalarProperty Name="RolName" ColumnName="RolName" />
+                <ScalarProperty Name="CommissionTypeID" ColumnName="CommissionTypeID" />
+                <ScalarProperty Name="RolID" ColumnName="RolID" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="PenaltyPercentage" ColumnName="PenaltyPercentage" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="SellerAddress" ColumnName="SellerAddress" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="Nit" ColumnName="Nit" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
