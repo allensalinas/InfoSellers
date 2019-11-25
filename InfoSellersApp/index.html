@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/site.css">
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+    <title>InfoSellers APP</title>
+</head>
+<body>
+    <input type="hidden" value="" id="hdID">
+              <div class="container">
+                    <div class="panel panel-primary">
+                            <div class="panel-heading">
+                              <h2>Seller List</h2>
+                            </div>
+                            <div class="panel-body">
+
+                                <button id="btnAddSeller" class="btn btn-primary">Add new seller</button>
+                              <table class="table table-striped">
+                                <thead>
+                                  <tr>
+                                    <th>ID</th>
+                                    <th>NIT</th>
+                                    <th>Full name</th>
+                                    <th>Phone</th>
+                                    <th>Address</th>
+                                    <th>Penalty %</th>
+                                    <th>Commission</th>
+                                    <th>Rol</th>
+                                    <th>Active</th>
+                                    <th></th>
+                                    <th></th>
+                                  </tr>
+                                </thead>
+                                <tbody id="table-body">
+                                </tbody>
+                              </table>
+                            </div>
+                          </div>
+              </div>
+
+              <div id="editingModal" class="modal" tabindex="-1" role="dialog">
+                    <div class="modal-dialog" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title">Create</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                            <form>
+                                <div class="form-group row">
+                                        <label for="txtNit" class="col-sm-3 col-form-label">Nit</label>
+                                        <div class="col-sm-9">
+                                                <input type="text" class="form-control" id="txtNit" placeholder="Enter nit">
+                                        </div>                                        
+                                </div>
+                                <div class="form-group row">
+                                        <label for="txtFullName" class="col-sm-3 col-form-label">Full name</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" class="form-control" id="txtFullName" placeholder="Enter full name">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                        <label for="txtPhone" class="col-sm-3 col-form-label">Phone</label>
+                                        <div class="col-sm-9">
+                                        <input type="text" class="form-control" id="txtPhone" placeholder="Enter phone">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                        <label for="txtAddress" class="col-sm-3 col-form-label">Address</label>
+                                        <div class="col-sm-9">
+                                        <input type="text" class="form-control" id="txtAddress" placeholder="Enter address">
+                                        </div>
+                                </div>
+                                <div class="form-group row">
+                                        <label for="listRole" class="col-sm-3 col-form-label">Rol</label>
+                                        <div class="col-sm-9">
+                                                <select id="listRole" class="form-control"></select>
+                                        </div>
+                                </div>
+                                <div class="form-group row">
+                                        <label for="txtPenaltyPercentage" class="col-sm-6 col-form-label">Penalty percentage %</label>
+                                        <div class="col-sm-6">
+                                                <input type="number" min="0" max="100" class="form-control" id="txtPenaltyPercentage" placeholder="%">
+                                        </div>
+                                </div>
+                                <div class="form-group row">
+                                        <label for="chkActive" class="col-sm-3 col-form-label">¿Is Active?</label>
+                                        <div class="col-sm-9">
+                                                <input type="checkbox" id="chkActive">
+                                        </div>
+                                </div>
+                            </form>
+                            aqui va el form
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                          <button type="button" class="btn btn-primary" id="btnSave">Save changes</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <script src="js/index.js"></script>
+</body>
+</html>

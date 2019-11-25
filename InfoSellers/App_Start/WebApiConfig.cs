@@ -1,4 +1,5 @@
 ﻿using System.Web.Http;
+using System.Web.Http.Cors;
 
 namespace InfoSellers
 {
@@ -10,6 +11,9 @@ namespace InfoSellers
 
             // Rutas de API web
             config.MapHttpAttributeRoutes();
+
+            var cors = new EnableCorsAttribute("http://127.0.0.1:8080", "*", "*");
+            config.EnableCors(cors);
 
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",

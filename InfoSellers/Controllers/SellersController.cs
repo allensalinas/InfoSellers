@@ -1,40 +1,69 @@
-﻿using InfoSellers.Models;
+﻿using InfoSellers.DTO;
+using InfoSellers.Models;
 using System.Collections.Generic;
+using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Cors;
 
 namespace InfoSellers.Controllers
 {
     public class SellersController : ApiController
     {
-        // GET api/<controller>
-        public IEnumerable<SellerModel> Get()
+        public HttpResponseMessage Get()
         {
-            return new List<SellerModel>()
+            var resultado = new Domain.Seller().ListSellers();
+            if (resultado.SuccessResult)
             {
-                new SellerModel(){ NIT = "9087123", FullName="ALLEN", Address = "ASDF"},
-                new SellerModel(){ NIT = "1234567", FullName="ALLEN SALINAS", Address = "A DD SDF"},
-            };
+                return Request.CreateResponse(System.Net.HttpStatusCode.OK, resultado.Result);
+            }
+            else
+            {
+                return Request.CreateResponse(System.Net.HttpStatusCode.InternalServerError, $"{resultado.ErrorID}: {resultado.ErrorDescription}");
+            }
         }
-
-        // GET api/<controller>/5
+        
         public string Get(int id)
         {
             return "value";
         }
-
-        // POST api/<controller>
-        public void Post([FromBody]string value)
+        
+        public HttpResponseMessage Post([FromBody]SellerDTO value)
         {
+            var resultado = new Domain.Seller().Create(value);
+            if (resultado.SuccessResult)
+            {
+                return Request.CreateResponse(System.Net.HttpStatusCode.OK, resultado.Result);
+            }
+            else
+            {
+                return Request.CreateResponse(System.Net.HttpStatusCode.InternalServerError, $"{resultado.ErrorID}: {resultado.ErrorDescription}");
+            }
         }
 
-        // PUT api/<controller>/5
-        public void Put(int id, [FromBody]string value)
+        public HttpResponseMessage Put(int id, [FromBody]SellerDTO value)
         {
+            var resultado = new Domain.Seller().Update(value);
+            if (resultado.SuccessResult)
+            {
+                return Request.CreateResponse(System.Net.HttpStatusCode.OK, resultado.Result);
+            }
+            else
+            {
+                return Request.CreateResponse(System.Net.HttpStatusCode.InternalServerError, $"{resultado.ErrorID}: {resultado.ErrorDescription}");
+            }
         }
 
-        // DELETE api/<controller>/5
-        public void Delete(int id)
+        public HttpResponseMessage Delete(int id)
         {
+            var resultado = new Domain.Seller().Delete(id);
+            if (resultado.SuccessResult)
+            {
+                return Request.CreateResponse(System.Net.HttpStatusCode.OK, resultado.Result);
+            }
+            else
+            {
+                return Request.CreateResponse(System.Net.HttpStatusCode.InternalServerError, $"{resultado.ErrorID}: {resultado.ErrorDescription}");
+            }
         }
     }
 }

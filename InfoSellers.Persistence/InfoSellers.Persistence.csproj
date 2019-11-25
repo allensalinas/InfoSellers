@@ -49,10 +49,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CommissionType.cs">
+      <DependentUpon>InfoSellersModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="InfoSellersModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>InfoSellersModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InfoSellersModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>InfoSellersModel.tt</DependentUpon>
     </Compile>
     <Compile Include="InfoSellersModel.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -60,6 +68,15 @@
       <DependentUpon>InfoSellersModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Rol.cs">
+      <DependentUpon>InfoSellersModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Seller.cs">
+      <DependentUpon>InfoSellersModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="View_Sellers.cs">
+      <DependentUpon>InfoSellersModel.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EntityDeploy Include="InfoSellersModel.edmx">
@@ -78,10 +95,22 @@
     <Content Include="InfoSellersModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>InfoSellersModel.Context.cs</LastGenOutput>
+      <DependentUpon>InfoSellersModel.edmx</DependentUpon>
+    </Content>
+    <Content Include="InfoSellersModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>InfoSellersModel.edmx</DependentUpon>
+      <LastGenOutput>InfoSellersModel.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\InfoSellers.DTO\InfoSellers.DTO.csproj">
+      <Project>{1eb2633f-99bd-4455-b1b2-86dccc1028ec}</Project>
+      <Name>InfoSellers.DTO</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

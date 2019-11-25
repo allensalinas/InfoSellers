@@ -11,6 +11,7 @@
 
 #Debug
 **/obj
+**/bin
 InfoSellers.Tests/obj/Debug/*
 InfoSellers/obj/*
 

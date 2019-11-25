@@ -97,6 +97,7 @@ namespace InfoSellers.Repository
                 d.SellerAddress = entity.SellerAddress;
                 d.Active = entity.Active;
                 d.CurrentCommission = entity.CurrentCommission;
+                data.SaveChanges();
             }
             return entity;
         }

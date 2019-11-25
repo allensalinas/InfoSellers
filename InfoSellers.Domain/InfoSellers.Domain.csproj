@@ -40,9 +40,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ISellers.cs" />
     <Compile Include="Model\OperationResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SecurityHelper.cs" />
     <Compile Include="Seller.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -50,9 +50,17 @@
       <Project>{1eb2633f-99bd-4455-b1b2-86dccc1028ec}</Project>
       <Name>InfoSellers.DTO</Name>
     </ProjectReference>
+    <ProjectReference Include="..\InfoSellers.EventLogger\InfoSellers.EventLogger.csproj">
+      <Project>{93ef2ade-8537-499c-a611-2ce67393e07d}</Project>
+      <Name>InfoSellers.EventLogger</Name>
+    </ProjectReference>
     <ProjectReference Include="..\InfoSellers.Persistence\InfoSellers.Persistence.csproj">
       <Project>{c166f35e-ee56-45a7-a98e-010deaf01ace}</Project>
       <Name>InfoSellers.Persistence</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\InfoSellers.Repository\InfoSellers.Repository.csproj">
+      <Project>{b93eb202-20cb-4348-8c8f-49bf31ed83ef}</Project>
+      <Name>InfoSellers.Repository</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
