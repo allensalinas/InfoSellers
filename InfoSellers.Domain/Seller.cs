@@ -40,6 +40,11 @@ namespace InfoSellers.Domain
             {
                 return "Invalid rol";
             }
+            if (seller.PenaltyPercentage < 0 || seller.PenaltyPercentage > 100)
+            {
+                return "Invalid penalty percentage";
+            }
+
             return OK;
         }
 

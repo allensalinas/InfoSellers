@@ -2,8 +2,8 @@ var rolesJson;
 var commissionTypesJson;
 window.addEventListener('load', function(){
     loadCommissionTypes();
-    loadRoles();
-    loadSellers();
+    // loadRoles();
+    // loadSellers();
 
     document.getElementById('btnAddSeller').addEventListener('click', function(){
         openCreateDialog();
@@ -43,6 +43,7 @@ function loadRoles(){
           for (let index = 0; index < jsonData.length; index++) {
                 select.options[select.options.length] = new Option(jsonData[index].RolName, jsonData[index].ID);
           }
+          loadSellers();
       }).catch(function(msg){
           alert(msg);
       })
@@ -53,6 +54,7 @@ function loadCommissionTypes(){
         return response.json();  
       }).then(function(jsonData){
           commissionTypesJson = jsonData;
+          loadRoles();
       }).catch(function(msg){
           alert(msg);
       })
@@ -159,8 +161,10 @@ function saveEditing(){
             if(response.ok)
             {
                 $('#editingModal').modal('hide');
+                // $('#notification').toast('show');
                 loadSellers();
             }else{
+
                 alert('Invalid response');
             }
         }).catch(function(error){
@@ -174,6 +178,7 @@ function saveEditing(){
             if(response.ok)
             {
                 $('#editingModal').modal('hide');
+
                 loadSellers();
             }else{
                 alert('Invalid response');
